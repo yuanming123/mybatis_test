@@ -1,11 +1,12 @@
 package com.test.mybatis.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import org.apache.ibatis.type.Alias;
 
 @Alias(value="Student")
-public class Student {
+public class Student implements Serializable{
 	private int id;
 	private String studentno;
 	private String name;
