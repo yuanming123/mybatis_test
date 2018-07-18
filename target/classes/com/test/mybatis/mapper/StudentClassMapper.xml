@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mybatis.dao.StudentClassMapper">
+  <select id="queryStudentClass" resultMap="studentClassMap">
+    select * from t_class c, t_student s where c.id = s.classid and c.id = #{id}
+  </select>
+  
+  <resultMap id="studentClassMap" type="StudentClass">
+  	<id property="id" column="id" />
+  	<result property="number" column="number"/>
+  	<result property="classname" column="classname"/>
+  	<collection property="studentList" javaType="ArrayList" ofType="Student">
+  		<result property="studentno" column="studentno"/>
+  		<result property="name" column="name"/>
+  		<result property="grade" column="grade"/>
+  	</collection>
+  </resultMap>
+</mapper>
