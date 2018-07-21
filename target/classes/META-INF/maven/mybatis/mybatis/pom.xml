@@ -62,5 +62,12 @@
 			<artifactId>pagehelper</artifactId>
 			<version>4.1.4</version>
 		</dependency>
+
+		<!-- 引入rdeis作为mybatis二级缓存 -->
+		<dependency>
+			<groupId>org.mybatis.caches</groupId>
+			<artifactId>mybatis-redis</artifactId>
+			<version>1.0.0-beta2</version>
+		</dependency>
 	</dependencies>
 </project>

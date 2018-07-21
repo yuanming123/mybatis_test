@@ -8,4 +8,6 @@ public interface StudentMapper {
 	public List<Student> queryStudentByName(Student student);
 	
 	public List<Student> queryStudent();
+	
+	public int insertStudent(Student student);
 }

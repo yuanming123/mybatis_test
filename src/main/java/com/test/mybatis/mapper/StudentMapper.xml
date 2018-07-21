@@ -3,7 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.test.mybatis.dao.StudentMapper">
-  <cache />
+  <!-- <cache /> -->  
+  <!--使用redis作为mybatis的二级缓存-->
+  <cache type="org.mybatis.caches.redis.RedisCache"/>
   <select id="queryStudentByName" parameterType="Student" resultType="Student">
     select * from t_student t
     <where>
@@ -16,4 +18,8 @@
   <select id="queryStudent" resultType="Student">
     select * from t_student
   </select>
+  
+  <insert id="insertStudent" parameterType="Student" flushCache="true">
+  	insert into t_student(studentno,name,grade,classid) values(#{studentno},#{name},#{grade},#{classid});
+  </insert>
 </mapper>

@@ -10,7 +10,8 @@ public class Student implements Serializable{
 	private int id;
 	private String studentno;
 	private String name;
-	private BigDecimal grade;
+	private double grade;
+	private int classid;
 	
 	public int getId() {
 		return id;
@@ -30,14 +31,21 @@ public class Student implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public BigDecimal getGrade() {
+	public double getGrade() {
 		return grade;
 	}
-	public void setGrade(BigDecimal grade) {
+	public void setGrade(double grade) {
 		this.grade = grade;
+	}
+	public int getClassid() {
+		return classid;
+	}
+	public void setClassid(int classid) {
+		this.classid = classid;
 	}
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", studentno=" + studentno + ", name=" + name + ", grade=" + grade + "]";
+		return "Student [id=" + id + ", studentno=" + studentno + ", name=" + name + ", grade=" + grade + ", classid="
+				+ classid + "]";
 	}
 }

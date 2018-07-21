@@ -24,22 +24,37 @@ public class Test {
     	SqlSessionFactory sqlSessionFactory=new SqlSessionFactoryBuilder().build(inputStream);
     	//通过工厂得到SqlSession
     	 SqlSession sqlSession1= sqlSessionFactory.openSession();
+    	 
     	  //通过SqlSession操作数据库
     	 //普通查询
     	 StudentMapper studentMapper1 = sqlSession1.getMapper(StudentMapper.class);
     	 List<Student> list = studentMapper1.queryStudent();
-    	 Iterator<Student> itList = list.iterator();
+    	 /*Iterator<Student> itList = list.iterator();
     	 while(itList.hasNext()) {
     		 System.out.println(itList.next().toString());
-    	 }
+    	 }*/
+    	 
+    	 //插一条数据,开启了二级缓存，在插入数据时需要添加flushCache="true",这样就会使缓存失效，再次从数据库中查询，保证数据的实时性
+    	 Student student = new Student();
+    	 student.setStudentno("00009");
+    	 student.setName("马六");
+    	 student.setGrade(98);
+    	 student.setClassid(5);
+    	 int flag = studentMapper1.insertStudent(student);
+    	 System.out.println(flag);
     	 sqlSession1.close();
     	 
+    	 
     	 SqlSession sqlSession2= sqlSessionFactory.openSession();
-   	  //通过SqlSession操作数据库
-   	 //普通查询
-   	 //List<Student> list1 = sqlSession2.selectList("queryStudent");
     	 StudentMapper studentMapper2 = sqlSession2.getMapper(StudentMapper.class);
+    	 long start = System.currentTimeMillis();
     	 studentMapper2.queryStudent();
+    	 long end = System.currentTimeMillis();
+    	 //测试二级缓存开启与关闭的查询效率
+    	 /**
+    	  * 数据库中有80000多条数据，不使用缓存是304，使用缓存之后是113，redis缓存 60
+    	  */
+    	 System.out.println(end - start);
     	 sqlSession2.close();
     	 
     	  //一对一
